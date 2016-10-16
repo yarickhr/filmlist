@@ -52,7 +52,7 @@ C:\Program Files\MySQL\MySQL Server 5.7\bin\mysql.exe –uroot –pfilmroot
 );
 База данных готова к использованию.
 4.	Переходим в директорию проекта:
-cd films-master
+cd filmlist
 запускаем: node server.js
 В консоли будет выведен адрес по которому запустилось приложение, и показан статус подключения к базе данных
 
