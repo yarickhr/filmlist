@@ -107,7 +107,25 @@ var Add = React.createClass({
 
     SortClick: function(e) {
             e.preventDefault();
-           
+            var stars = $('input[name=find]:checked').val()
+
+            if (stars == "actor") {
+
+                myfilms.sort(function(a, b) {
+                    var one = a.author.toLowerCase(),
+                        two = b.author.toLowerCase();
+
+                     if (one < two) {
+                        return -1;
+                     } else if (one > two) {
+                        return 1;
+                     };
+
+                     return 0;  
+
+                });
+
+            } else {
             
             myfilms.sort(function(a, b) {
                 var one = a.film.toLowerCase(),
@@ -123,6 +141,8 @@ var Add = React.createClass({
 
             });
 
+        };
+
             window.ee.emit('FilmSort.add', myfilms);
     },
 
@@ -136,38 +156,6 @@ var Add = React.createClass({
 
     },
 
-/*     Valid: function(e) {
-
-            var yearEL = ReactDOM.findDOMNode(this.refs.year),
-                year = yearEL.value;
-            
-            if (year) {
-                 var valid = {};
-                 if (year.length != 4) {
-                    valid.noyear = false;
-                    this.setState(valid);
-                    this.setState({filmIsEmpty: true});
-                    return false;
-                 };       
-
-                 var current_year = new Date().getFullYear();
-                 if ((year < 1900) || (year > current_year)) {
-                    alert(3)
-                    return false;
-                 };
-
-
-            };    
-
-        
-
-    },
-
-    ResValid: function(e) {
-
-        
-
-    },*/
 
     onFilmFind: function(e) {
     	var filmname = ReactDOM.findDOMNode(this.refs.findfilm);
