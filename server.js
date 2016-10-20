@@ -143,9 +143,34 @@ function savelist(req, res) {
           while (i < arr.length) {
             
             var obj = {};
+            var year = arr[i+1]['Release Year'];
+            var isnumer = isNaN(year);
+            console.log("!!!!!!!!!!!!!!!!" + isnumer);
+            var current_year = new Date().getFullYear();
 
             obj.idfilm = Date.now() + i;
-            obj.year = arr[i+1]['Release Year'];
+                                             //Валидация year
+            if (isnumer) {
+
+              obj.year = "";
+
+
+            } else if (year.length != 4) {
+                       
+              obj.year = "";
+              
+            
+            } else if ((year < 1900) || (year > current_year)) {
+                     
+              obj.year = ""; 
+                
+            } else {
+
+              obj.year = year;
+                 
+            };
+
+            
             obj.film = arr[i]['Title'];
             obj.author = arr[i+3]['Stars'];
             obj.format = arr[i+2]['Format'];
@@ -157,7 +182,7 @@ function savelist(req, res) {
 
          var back = JSON.stringify(arrnew);
                  
-        console.log(arrnew);
+        console.log("УУУУУ" + arrnew);
 
         var e = 0;
 
