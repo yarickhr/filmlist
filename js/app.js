@@ -14,12 +14,6 @@ window.ee = new EventEmitter();
 
 var Add = React.createClass({
 
-    /*getDefaultProps: function() {
-        return {
-            
-        }
-
-    },*/
 
     getInitialState: function() {
         return {
@@ -280,12 +274,16 @@ var Fileset = React.createClass({
                           url: "http://localhost:3000/give"
                         })
                         .done(function( table ) {
-                            myfilms = JSON.parse(table);
-                            window.ee.emit('FilmSort.add', myfilms);    
+                            var arr = [];
+                            var newfilms = JSON.parse(table);
+                            myfilms = arr.concat(newfilms);
+                            window.ee.emit('FilmSort.add', myfilms);                                
                           });
                 }).fail(function()  {
                    console.log("Sorry. Server unavailable. ");
                 }); 
+
+
 
     },
 
