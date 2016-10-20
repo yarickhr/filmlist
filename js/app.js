@@ -14,10 +14,19 @@ window.ee = new EventEmitter();
 
 var Add = React.createClass({
 
+    /*getDefaultProps: function() {
+        return {
+            
+        }
+
+    },*/
+
     getInitialState: function() {
         return {
-            filmIsEmpty: true,
-            formyear: false
+
+            exitYear: true,
+            filmIsEmpty: true
+            
         };
     },
 
@@ -51,14 +60,15 @@ var Add = React.createClass({
 
               if (year) {
                  
+
                  if (year.length != 4) {
-                    this.setState({formyear: true})  //Вставить появление снизу елемента ошибки
+                    this.setState({exitYear: false});  //Вставить появление снизу елемента ошибки
                     return false;
                  };       
 
                  var current_year = new Date().getFullYear();
                  if ((year < 1900) || (year > current_year)) {
-                    this.setState({formyear: true})//Вставить появление снизу елемента ошибки
+                    this.setState({exitYear: false}); //Вставить появление снизу елемента ошибки
                     return false;
                  };
 
@@ -118,6 +128,12 @@ var Add = React.createClass({
 
     onCheckRuleClick: function (e) {
         ReactDOM.findDOMNode(this.refs.alert_button).disabled = !e.target.checked;
+    },
+
+    clearYear: function(e) {
+            e.preventDefault();
+           this.setState({exitYear: true});  
+
     },
 
 /*     Valid: function(e) {
@@ -193,7 +209,7 @@ var Add = React.createClass({
             <div className="ui two column stackable padded grid">
                     <div className="olive column fixed-width">
                       <div className="ui list">
-                        <div className="ui input item">
+                        <div className="ui input item" onFocus={this.clearYear}>
                             <input
                                 onFocus={this.ResValid}
                                 onBlur={this.Valid}
@@ -205,7 +221,7 @@ var Add = React.createClass({
                                 placeholder='Год выхода'
                                 ref='year'
                             />
-                        <div className="ui pointing red basic label">Укажите год от 1990 до {new Date().getFullYear()}</div>
+                        <div className={'ui pointing red basic label ' + (this.state.exitYear ? 'none':'' )}>Укажите год от 1990 до {new Date().getFullYear()}</div>
                         </div>
                         <div className="ui input item">
                             <input
