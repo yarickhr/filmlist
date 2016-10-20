@@ -209,7 +209,7 @@ var Add = React.createClass({
                                 placeholder='Год выхода'
                                 ref='year'
                             />
-                        <div className={'ui pointing red basic label ' + (this.state.exitYear ? 'none':'' )}>Укажите год от 1990 до {new Date().getFullYear()}</div>
+                        <div className={'ui pointing red basic label ' + (this.state.exitYear ? 'none':'' )}>Укажите год от 1900 до {new Date().getFullYear()}</div>
                         </div>
                         <div className="ui input item">
                             <input
