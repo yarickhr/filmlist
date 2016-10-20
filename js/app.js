@@ -16,7 +16,8 @@ var Add = React.createClass({
 
     getInitialState: function() {
         return {
-            filmIsEmpty: true
+            filmIsEmpty: true,
+            formyear: false
         };
     },
 
@@ -47,6 +48,22 @@ var Add = React.createClass({
         var year = yearEL.value,
             film = filmEl.value,
             author = authorEl.value;
+
+              if (year) {
+                 
+                 if (year.length != 4) {
+                    this.setState({formyear: true})  //Вставить появление снизу елемента ошибки
+                    return false;
+                 };       
+
+                 var current_year = new Date().getFullYear();
+                 if ((year < 1900) || (year > current_year)) {
+                    this.setState({formyear: true})//Вставить появление снизу елемента ошибки
+                    return false;
+                 };
+
+
+            };   
 
         var item = [{
             idfilm: idfilm,
@@ -103,6 +120,39 @@ var Add = React.createClass({
         ReactDOM.findDOMNode(this.refs.alert_button).disabled = !e.target.checked;
     },
 
+/*     Valid: function(e) {
+
+            var yearEL = ReactDOM.findDOMNode(this.refs.year),
+                year = yearEL.value;
+            
+            if (year) {
+                 var valid = {};
+                 if (year.length != 4) {
+                    valid.noyear = false;
+                    this.setState(valid);
+                    this.setState({filmIsEmpty: true});
+                    return false;
+                 };       
+
+                 var current_year = new Date().getFullYear();
+                 if ((year < 1900) || (year > current_year)) {
+                    alert(3)
+                    return false;
+                 };
+
+
+            };    
+
+        
+
+    },
+
+    ResValid: function(e) {
+
+        
+
+    },*/
+
     onFilmFind: function(e) {
     	var filmname = ReactDOM.findDOMNode(this.refs.findfilm);
     	var	filmval = filmname.value;
@@ -145,6 +195,8 @@ var Add = React.createClass({
                       <div className="ui list">
                         <div className="ui input item">
                             <input
+                                onFocus={this.ResValid}
+                                onBlur={this.Valid}
                                 type="number"
                                 min="1900"
                                 max="2017"
@@ -153,6 +205,7 @@ var Add = React.createClass({
                                 placeholder='Год выхода'
                                 ref='year'
                             />
+                        <div className="ui pointing red basic label">Укажите год от 1990 до {new Date().getFullYear()}</div>
                         </div>
                         <div className="ui input item">
                             <input
