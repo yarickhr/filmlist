@@ -145,7 +145,6 @@ function savelist(req, res) {
             var obj = {};
             var year = arr[i+1]['Release Year'];
             var isnumer = isNaN(year);
-            console.log("!!!!!!!!!!!!!!!!" + isnumer);
             var current_year = new Date().getFullYear();
 
             obj.idfilm = Date.now() + i;

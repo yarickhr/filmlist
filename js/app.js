@@ -278,7 +278,7 @@ var Fileset = React.createClass({
 
     Upload: function(e) {
         e.preventDefault();
-        var newfilms;
+        
         var formData = new FormData($('#formfile')[0]);
         $.ajax({
                  type: "POST",
@@ -292,8 +292,8 @@ var Fileset = React.createClass({
                           url: "http://localhost:3000/give"
                         })
                         .done(function( table ) {
-                            newfilms = JSON.parse(table);
-                            window.ee.emit('FilmSort.add', newfilms);    
+                            myfilms = JSON.parse(table);
+                            window.ee.emit('FilmSort.add', myfilms);    
                           });
                 }).fail(function()  {
                    console.log("Sorry. Server unavailable. ");
@@ -365,12 +365,15 @@ var Article = React.createClass({
     			var search = myfilms[i].idfilm;
     			if (search == id) {
     				myfilms.splice(i, 1);
-    				console.log(1)
+    				console.log("LOAD" + myfilms)
+                    
     				
     			} 
     			
     		};
-    		window.ee.emit('FilmSort.add', myfilms);	
+           
+            window.ee.emit('FilmSort.add', myfilms); 
+    		
     },
 
     render:  function () {
