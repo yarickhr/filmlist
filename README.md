@@ -44,7 +44,7 @@ C:\Program Files\MySQL\MySQL Server 5.7\bin\mysql.exe –uroot –pfilmroot
   CREATE TABLE myfilms (
   id int NOT NULL auto_increment,
   idfilm text,
-  year int,
+  year text,
   film text,
   author text,
   format text,
